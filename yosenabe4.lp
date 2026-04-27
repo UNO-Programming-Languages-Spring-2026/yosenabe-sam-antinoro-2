@@ -38,13 +38,16 @@ target_area(XX,YY, A) :- target(X, Y, XX, YY), area(XX, YY, A).
 
 %if X1 inline with X2; Y2 at same height as Y1 -- if start coords are in
 
-%ONLY checking VERTICAL intersection
+%check intersection by checking if 1 falls in path of 2, and checking intersection point
 :- target(X,Y,XX,YY), target(X2,Y2,XX2,YY2), (X, Y) != (X2, Y2),
-H = (X..XX;XX..X), J = (Y..YY;YY..Y), %falls on T1's path
-H = (X2..XX2;XX2..X2), J=(Y2..YY2;YY2..Y2). %AND falls on T2's path
+X3 = (X..XX;XX..X), Y3 = (Y..YY;YY..Y), %falls on T1's path
+X3 = (X2..XX2;XX2..X2), Y3 =(Y2..YY2;YY2..Y2). %AND falls on T2's path
 
 
 
+%question 4
+destin_area(DA) :- area(XX, YY, A).
+%sum_areas(SA) :- SA = #sum{ N, X Y: number(X, Y, N)}
 
 
 
