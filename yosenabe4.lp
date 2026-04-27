@@ -38,10 +38,14 @@ target_area(XX,YY, A) :- target(X, Y, XX, YY), area(XX, YY, A).
 
 %if X1 inline with X2; Y2 at same height as Y1 -- if start coords are in
 
-%check intersection by checking if 1 falls in path of 2, and checking intersection point
+%ONLY checking VERTICAL intersection
 :- target(X,Y,XX,YY), target(X2,Y2,XX2,YY2), (X, Y) != (X2, Y2),
 H = (X..XX;XX..X), J = (Y..YY;YY..Y), %falls on T1's path
 H = (X2..XX2;XX2..X2), J=(Y2..YY2;YY2..Y2). %AND falls on T2's path
+
+
+
+
 
 
 #show target/4.
