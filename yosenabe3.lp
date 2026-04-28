@@ -35,13 +35,17 @@ target_area(XX,YY, A) :- target(X, Y, XX, YY), area(XX, YY, A).
 
 %question 3 - no crossing paths
 % X <= item <= XX; XX >= item >= X --> if this, AND Ypath falls on it
-
 %if X1 inline with X2; Y2 at same height as Y1 -- if start coords are in
-
 %check intersection by checking if 1 falls in path of 2, and checking intersection point
-:- target(X,Y,XX,YY), target(X2,Y2,XX2,YY2), (X, Y) != (X2, Y2),
-X3 = (X..XX;XX..X), Y3 = (Y..YY;YY..Y), %falls on T1's path
-X3 = (X2..XX2;XX2..X2), Y3 =(Y2..YY2;YY2..Y2). %AND falls on T2's path
+
+%ORIGINAL: (SLOWED THE AUTOGRADER DOWN LIKE CRAAAAZY)
+%:- target(X,Y,XX,YY), target(X2,Y2,XX2,YY2), (X, Y) != (X2, Y2),
+%X3 = (X..XX;XX..X), Y3 = (Y..YY;YY..Y), %falls on T1's path
+%X3 = (X2..XX2;XX2..X2), Y3 =(Y2..YY2;YY2..Y2). %AND falls on T2's path
+
+%split into 2 rules instead of one constraint
+intersect(X,Y, X3,Y3) :- target(X, Y, XX, YY), X3 = (X..XX;XX..X), Y3=(Y..YY;YY..Y).
+:-intersect(X1, Y1, X3, Y3), intersect(X2, Y2, X3, Y3), (X1, Y1) != (X2, Y2).
 
 
 #show target/4.
